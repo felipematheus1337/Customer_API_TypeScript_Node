@@ -2,7 +2,8 @@ import express from "express"
 import cors from "cors";
 import dotenv from "dotenv";
 import { AppDataSource } from "./database/data-source";
-import helloRoutes from "./routes/HelloRoute";
+import helloRoutes from "./routes/helloRoute";
+import customerRouter from "./routes/customerRoute";
 
 dotenv.config();
 
@@ -27,7 +28,8 @@ class App {
     }
 
     routes():void {
-      this.app.use(helloRoutes);
+      this.app.use("/",helloRoutes);
+      this.app.use("/api/v1/",customerRouter);
     }
 
     dbConnection():void {
