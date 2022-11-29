@@ -1,12 +1,10 @@
 import { Router } from "express";
-
+import helloController from "../controllers/HelloController";
 
 const routes = Router();
 
 
-routes.get("/",(req,res) => {
-    res.json("Hello Controller");
-})
+routes.get("/",helloController.greeting);
 
 
 export default routes;
