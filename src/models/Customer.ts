@@ -16,7 +16,7 @@ export class Customer {
     @Column({type:'text',nullable:false})
     address:string;
 
-    @Column({type:'number'})
+    @Column({type:'integer'})
     loyalty:number;
 
     

@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors";
 import dotenv from "dotenv";
-import { AppDataSource } from "./database/data-source";
+import { AppDataSource } from "./data-source";
 import helloRoutes from "./routes/helloRoute";
 import customerRouter from "./routes/customerRoute";
 
