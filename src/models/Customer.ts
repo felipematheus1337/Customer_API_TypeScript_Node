@@ -19,6 +19,5 @@ export class Customer {
     @Column({type:'number'})
     loyalty:number;
 
-
-
+    
 }
