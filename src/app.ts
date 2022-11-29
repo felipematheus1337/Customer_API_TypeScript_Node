@@ -1,6 +1,8 @@
 import express from "express"
 import cors from "cors";
 import dotenv from "dotenv";
+import { AppDataSource } from "./database/data-source";
+import helloRoutes from "./routes/HelloRoute";
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ class App {
         this.app = express();
         this.middlewares();
         this.routes();
+        this.dbConnection();
     }
 
 
@@ -24,7 +27,13 @@ class App {
     }
 
     routes():void {
+      this.app.use(helloRoutes);
+    }
 
+    dbConnection():void {
+      AppDataSource.initialize().then(() => {
+        console.log("Iniciou a conexão com o banco")
+      })
     }
 }
 
