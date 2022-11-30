@@ -18,6 +18,7 @@ export class Customer {
 
     @Column({type:'integer'})
     loyalty:number;
+    
 
     
 }
