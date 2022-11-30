@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { EqualOperator } from "typeorm";
+import { BadRequestError, NotFoundError } from "../exceptions/api-errors";
 import { Customer } from "../models/Customer";
 import { customerRepository } from "../repositories/customerRepository";
 import  customerService  from "../service/CustomerService";
@@ -10,7 +11,7 @@ class CustomerController {
      const allCustomers = await customerRepository.find({});
 
      if(!allCustomers) {
-        return res.status(204).json("Nenhum Costumer encontrado");
+        throw new NotFoundError("Customers não encontrados!");
      }
      return res.json(allCustomers);
     }
@@ -19,7 +20,7 @@ class CustomerController {
         const customer = req.body;
 
         if(!customer) {
-            throw new Error("Campos devem ser preenchidos!")
+            throw new BadRequestError("Campos devem ser preenchidos!")
         }
 
        const customertoAdd =  customerRepository.create(customer);
@@ -33,7 +34,7 @@ class CustomerController {
     async getOneCustomerById(req:Request,res:Response) {
 
      if(!req.params) {
-       throw new Error("É preciso ter um parâmetro de busca!")
+       throw new BadRequestError("É preciso ter um parâmetro de busca!")
      }
 
      const {id} = req.params;
@@ -41,7 +42,7 @@ class CustomerController {
      const customerFinded = await customerService.findById(id);
      
      if(!customerFinded) {
-        throw new Error("Customer não encontrado");
+        throw new NotFoundError("Customer não encontrado");
      }
 
      return res.json(customerFinded);
@@ -50,12 +51,12 @@ class CustomerController {
 
     async editCustomer(req:Request,res:Response) {
       if(!req.params) {
-        throw new Error("É preciso ter um parâmetro de busca!")
+        throw new BadRequestError("É preciso ter um parâmetro de busca!")
       }
       const thingsToUpdateOnCustomer = req.body;
 
       if(!thingsToUpdateOnCustomer) {
-        throw new Error("É preciso ter algo para se alterar!")
+        throw new BadRequestError("É preciso ter algo para se alterar!")
       }
 
       const {id} = req.params; 
@@ -63,7 +64,7 @@ class CustomerController {
       const customerToUpdate = await customerService.findById(id) as Customer;
 
       if(!customerToUpdate) {
-        throw new Error("Costumer não encontrado com esse id");
+        throw new NotFoundError("Costumer não encontrado com esse id");
       }
     
     
@@ -76,14 +77,14 @@ class CustomerController {
 
     async deleteCustomer(req:Request,res:Response) {
         if(!req.params) {
-            throw new Error("É preciso ter um parâmetro de busca!")
-          }
+            throw new BadRequestError("É preciso ter um parâmetro de busca!")
+        }
         const {id} = req.params; 
     
         const customerToUpdate = await customerService.findById(id) as Customer;
     
         if(!customerToUpdate) {
-            throw new Error("Costumer não encontrado com esse id");
+            throw new NotFoundError("Costumer não encontrado com esse id");
           }
         
         

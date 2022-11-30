@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { AppDataSource } from "./data-source";
 import helloRoutes from "./routes/helloRoute";
 import customerRouter from "./routes/customerRoute";
+import { errorMiddleware } from "./middlewares/error";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ class App {
       this.app.use(express.urlencoded({extended:true}))
       this.app.use(express.json());
       this.app.use(cors());
+      this.app.use(errorMiddleware);
     }
 
     routes():void {
@@ -37,6 +39,7 @@ class App {
         console.log("Iniciou a conexão com o banco")
       })
     }
+
 }
 
 export default new App().app;
