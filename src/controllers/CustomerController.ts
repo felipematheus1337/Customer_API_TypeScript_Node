@@ -61,7 +61,7 @@ class CustomerController {
 
       const {id} = req.params; 
 
-      const customerToUpdate = await customerService.findById(id) as Customer;
+      const customerToUpdate = await customerService.findById(id);
 
       if(!customerToUpdate) {
         throw new NotFoundError("Costumer não encontrado com esse id");

@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import { AppDataSource } from "./data-source";
 import helloRoutes from "./routes/helloRoute";
 import customerRouter from "./routes/customerRoute";
+import userRouter from "./routes/userRoute";
 import { errorMiddleware } from "./middlewares/error";
+import BusinessController from "./controllers/BusinessController";
 
 dotenv.config();
 
@@ -31,7 +33,9 @@ class App {
 
     routes():void {
       this.app.use("/",helloRoutes);
-      this.app.use("/api/v1/",customerRouter);
+      this.app.use("/api/v1/customer",customerRouter);
+      this.app.use("/api/v1/user",userRouter);
+      this.app.get("/api/v1/discount/:id",BusinessController.getCustomerDiscount);
     }
 
     dbConnection():void {
