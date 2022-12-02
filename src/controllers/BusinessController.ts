@@ -31,6 +31,11 @@ class BusinessController {
      return res.json({message:`Desconto de ${discount}% autorizado para o customer: ${customer.name}`});
     }
 
+
+   async getPDFofCustomers()  {
+      
+   }
+
 }
 
 

@@ -7,6 +7,7 @@ import customerRouter from "./routes/customerRoute";
 import userRouter from "./routes/userRoute";
 import { errorMiddleware } from "./middlewares/error";
 import BusinessController from "./controllers/BusinessController";
+import businessRouter from "./routes/businessRoutes";
 
 dotenv.config();
 
@@ -35,7 +36,7 @@ class App {
       this.app.use("/",helloRoutes);
       this.app.use("/api/v1/customer",customerRouter);
       this.app.use("/api/v1/user",userRouter);
-      this.app.get("/api/v1/discount/:id",BusinessController.getCustomerDiscount);
+      this.app.use("/api/v1/business",businessRouter);
     }
 
     dbConnection():void {
