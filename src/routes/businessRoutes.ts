@@ -5,8 +5,9 @@ import { authMiddleware } from "../middlewares/authMiddleware";
 const businessRouter = Router();
 
 
-businessRouter.use(authMiddleware);
+
 businessRouter.get("/discount/:id",BusinessController.getCustomerDiscount);
+businessRouter.get("/pdf/",BusinessController.getPDFofCustomers);
 
 
 
