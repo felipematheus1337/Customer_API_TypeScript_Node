@@ -7,7 +7,6 @@
 <h4><b>Autenticação JWT</b></h4>
 <h4><b>Upload de imagens</b></h4>
 <h4><b>CRUD completo</b></h4>
-<h4><b>Documentação com Swagger</b></h4>
 <hr>
 <br>
 <h2>Tecnologias Utilizadas:</h2>
